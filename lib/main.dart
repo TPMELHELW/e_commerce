@@ -2,7 +2,6 @@ import 'package:e_commerce/features/authentication/screens/on_boarding_screen/on
 import 'package:e_commerce/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 void main() {
   runApp(const MyApp());

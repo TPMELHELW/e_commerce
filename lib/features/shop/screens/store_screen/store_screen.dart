@@ -1,4 +1,3 @@
-import 'package:e_commerce/common/widget/app_bar_widget.dart';
 import 'package:e_commerce/common/widget/header_widget.dart';
 import 'package:e_commerce/common/widget/product_grid_view_widget.dart';
 import 'package:e_commerce/common/widget/search_bar_widget.dart';
@@ -17,7 +16,7 @@ class StoreScreen extends StatelessWidget {
       length: 5,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0,
+          elevation: 1,
           backgroundColor: Colors.white,
         ),
         body: NestedScrollView(
@@ -52,7 +51,7 @@ class StoreScreen extends StatelessWidget {
           body: TabBarView(
             children: [
               ListView(
-                physics:const NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: [
                   Container(
@@ -156,11 +155,9 @@ class StoreScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ),
-
                 ],
               ),
               Container(
