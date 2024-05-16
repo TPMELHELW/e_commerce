@@ -1,7 +1,7 @@
-import 'package:e_commerce/common/screen/verify_screen.dart';
+import 'package:e_commerce/features/authentication/controllers/forget_password_controller.dart';
 import 'package:e_commerce/common/widget/button_widget.dart';
-import 'package:e_commerce/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:e_commerce/utils/constants/text_strings.dart';
+import 'package:e_commerce/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,6 +11,7 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -34,23 +35,24 @@ class ForgetPasswordScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                  labelText: AppTexts.email,
-                  prefixIcon: Icon(Iconsax.direct_right)),
+            Form(
+              key: controller.formState,
+              child: TextFormField(
+                controller: controller.email,
+                validator: AppFieldValidator.validateEmail,
+                decoration: const InputDecoration(
+                    labelText: AppTexts.email,
+                    prefixIcon: Icon(Iconsax.direct_right)),
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            ButtonWidget(
-              text: AppTexts.tContinue,
-              onPress: () => Get.off(
-                VerifyScreen(
-                  title: AppTexts.changeYourPasswordTitle,
-                  subTitle: AppTexts.changeYourPasswordSubTitle,
-                  onPress: () => Get.to(() => const LoginScreen()),
-                ),
-              ),
+            Obx(
+              () => ButtonWidget(
+                  statusRequest: controller.statusRequest.value,
+                  text: AppTexts.tContinue,
+                  onPress: () => controller.sendResetPassword()),
             )
           ],
         ),

@@ -8,103 +8,113 @@ class ProductCardVerticalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
-      width: 180,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
           BoxShadow(
-            color: Colors.black,
-            offset: Offset(5, 5),
-            blurRadius: 20,
-          ),
+              color: Colors.black,
+              offset: Offset(2, 2),
+              blurRadius: 2,
+              spreadRadius: 0.3),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: Stack(
         children: [
-          Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.black38,
-                ),
-                child: Image.asset(
-                  AppImages.productImage1,
-                ),
-              ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Iconsax.heart),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(5),
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  '25%',
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ),
-            ],
+          ///Image
+          Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.black38,
+            ),
+            child: Image.asset(
+              AppImages.productImage1,
+            ),
           ),
-          Text(
-            'Green Nike Air Force',
-            textAlign: TextAlign.left,
-            style: Theme.of(context).textTheme.titleSmall,
+
+          ///heart Icon
+          Positioned(
+            right: 0,
+            top: 0,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Iconsax.heart),
+            ),
           ),
-          const SizedBox(
-            height: 10,
+
+          ///persent
+          Container(
+            padding: const EdgeInsets.all(5),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              '25%',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
           ),
-          Row(
-            children: [
-              Text(
-                'Nike',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              const Icon(
-                Iconsax.verify5,
-                size: 25,
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '\$300',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(10),
-                  ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ///product name
+                Text(
+                  'Green Nike Air Force',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Iconsax.add,
-                  ),
+
+                ///company name
+                Row(
+                  children: [
+                    Text(
+                      'Nike',
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Icon(
+                      Iconsax.verify5,
+                      size: 15,
+                    )
+                  ],
                 ),
-              )
-            ],
+
+                ///price and add button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '\$300',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Iconsax.add,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           )
         ],
       ),

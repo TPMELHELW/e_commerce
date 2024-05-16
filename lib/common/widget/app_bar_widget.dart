@@ -1,5 +1,7 @@
+import 'package:e_commerce/features/personalization/controller/user_controller.dart';
 import 'package:e_commerce/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CustomAppBarWidget extends StatelessWidget
@@ -15,8 +17,8 @@ class CustomAppBarWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return AppBar(
-// toolbarHeight: 150,
       automaticallyImplyLeading: false,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,10 +32,14 @@ class CustomAppBarWidget extends StatelessWidget
                       .apply(color: Colors.white),
                 )
               : Text(''),
-          Text(
-            title,
-            style:
-                Theme.of(context).textTheme.headlineSmall!.apply(color: color),
+          Obx(
+            () => Text(
+              controller.user.value.firstName,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .apply(color: color),
+            ),
           )
         ],
       ),
@@ -47,6 +53,5 @@ class CustomAppBarWidget extends StatelessWidget
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

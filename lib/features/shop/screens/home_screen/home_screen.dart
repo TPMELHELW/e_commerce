@@ -1,3 +1,4 @@
+import 'package:e_commerce/common/widget/clip_path_container_widget.dart';
 import 'package:e_commerce/common/widget/product_grid_view_widget.dart';
 import 'package:e_commerce/features/shop/controllers/home_controller.dart';
 import 'package:e_commerce/common/widget/app_bar_widget.dart';
@@ -19,29 +20,26 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ClipPath(
-              clipper: MyClipper(),
-              child: Container(
-                color: Colors.blue,
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.48,
-                child: const Column(
-                  children: [
-                    CustomAppBarWidget(
-                      title: AppTexts.homeAppbarTitle,
-                      isSubTitle: true,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SearchBarWidget(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    PopularCategoriesWidget()
-                  ],
-                ),
+            const ClipPathContainerWidget(
+              child: Column(
+                children: [
+                  CustomAppBarWidget(
+                    title: AppTexts.homeAppbarTitle,
+                    isSubTitle: true,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SearchBarWidget(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  PopularCategoriesWidget(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
             ),
             PromoSliderWidget(
@@ -49,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             ),
             ProductGridWidget(
               itemCount: 10,
-              mainAxisExtent: 277,
+              mainAxisExtent: 257,
               itemBuilder: (BuildContext context, int index) {
                 return const ProductCardVerticalWidget();
               },
@@ -59,32 +57,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0, size.height);
-
-    final firstCurve = Offset(30, size.height - 20);
-    path.arcToPoint(
-      radius: const Radius.circular(30),
-      firstCurve,
-    );
-
-    path.lineTo(size.width - 30, size.height - 20);
-    final secondCurve = Offset(size.width, size.height);
-    path.arcToPoint(
-      radius: const Radius.circular(30),
-      secondCurve,
-    );
-    path.lineTo(size.width, 0);
-
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
 }

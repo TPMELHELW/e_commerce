@@ -2,6 +2,7 @@ import 'package:e_commerce/common/widget/button_widget.dart';
 import 'package:e_commerce/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:e_commerce/utils/constants/image_strings.dart';
 import 'package:e_commerce/utils/constants/text_strings.dart';
+import 'package:e_commerce/utils/function/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +40,12 @@ class SuccessScreen extends StatelessWidget {
               height: 25,
             ),
             ButtonWidget(
-              onPress: () => Get.offAll(() => const LoginScreen()),
+              onPress: () {
+                Get.offAll(() => const LoginScreen());
+
+                showSuccessSnackbar(
+                    'Success', 'Your Account has been verified');
+              },
               text: AppTexts.tContinue,
             )
           ],

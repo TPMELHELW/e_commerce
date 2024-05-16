@@ -1,18 +1,21 @@
-import 'package:e_commerce/common/screen/success_screen.dart';
-import 'package:e_commerce/common/screen/verify_screen.dart';
 import 'package:e_commerce/common/widget/button_widget.dart';
-// import 'package:e_commerce/features/authentication/screens/signup_screen/verify_screen.dart';
+import 'package:e_commerce/features/authentication/controllers/signup_controller.dart';
 import 'package:e_commerce/utils/constants/text_strings.dart';
+import 'package:e_commerce/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SignupFormWidget extends StatelessWidget {
-  const SignupFormWidget({super.key});
+  const SignupFormWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final controller = SignUpController.instance;
     return Form(
+      key: controller.formState,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -20,6 +23,9 @@ class SignupFormWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
+                  validator: (value) => AppFieldValidator.validateEmpty(
+                      value, AppTexts.firstName),
+                  controller: controller.firstName,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Iconsax.user),
                     labelText: AppTexts.firstName,
@@ -31,6 +37,9 @@ class SignupFormWidget extends StatelessWidget {
               ),
               Expanded(
                 child: TextFormField(
+                  validator: (value) =>
+                      AppFieldValidator.validateEmpty(value, AppTexts.lastName),
+                  controller: controller.lastName,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Iconsax.user),
                     labelText: AppTexts.lastName,
@@ -43,6 +52,9 @@ class SignupFormWidget extends StatelessWidget {
             height: 10,
           ),
           TextFormField(
+            validator: (value) =>
+                AppFieldValidator.validateEmpty(value, AppTexts.username),
+            controller: controller.userName,
             decoration: const InputDecoration(
               prefixIcon: Icon(Iconsax.user_edit),
               labelText: AppTexts.username,
@@ -52,6 +64,8 @@ class SignupFormWidget extends StatelessWidget {
             height: 10,
           ),
           TextFormField(
+            validator: (val) => AppFieldValidator.validateEmail(val),
+            controller: controller.email,
             decoration: const InputDecoration(
               prefixIcon: Icon(Iconsax.direct_right),
               labelText: AppTexts.email,
@@ -61,6 +75,8 @@ class SignupFormWidget extends StatelessWidget {
             height: 10,
           ),
           TextFormField(
+            validator: (value) => AppFieldValidator.validatePhoneNumber(value),
+            controller: controller.phone,
             decoration: const InputDecoration(
               prefixIcon: Icon(Iconsax.call),
               labelText: AppTexts.phoneNo,
@@ -69,11 +85,22 @@ class SignupFormWidget extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextFormField(
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Iconsax.password_check),
-              labelText: AppTexts.password,
-              suffixIcon: Icon(Iconsax.eye_slash),
+          Obx(
+            () => TextFormField(
+              obscureText: controller.isHide.value,
+              validator: (value) => AppFieldValidator.validatePassword(value),
+              controller: controller.password,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Iconsax.password_check),
+                labelText: AppTexts.password,
+                suffixIcon: IconButton(
+                  icon: Icon(controller.isHide.value
+                      ? Iconsax.eye_slash
+                      : Iconsax.eye),
+                  onPressed: () =>
+                      controller.isHide.value = !controller.isHide.value,
+                ),
+              ),
             ),
           ),
           const SizedBox(
@@ -81,7 +108,12 @@ class SignupFormWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              Checkbox(value: true, onChanged: (val) {}),
+              Obx(
+                () => Checkbox(
+                  value: controller.isCheck.value,
+                  onChanged: (val) => controller.isCheck.value = val,
+                ),
+              ),
               Text.rich(
                 TextSpan(
                   children: [
@@ -110,15 +142,12 @@ class SignupFormWidget extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          ButtonWidget(
-            onPress: () => Get.to(
-              () =>  VerifyScreen(
-                title: AppTexts.confirmEmail,
-                subTitle: AppTexts.confirmEmailSubTitle,
-                onPress: ()=> Get.to(() => const SuccessScreen()),
-              ),
+          Obx(
+            ()=> ButtonWidget(
+              statusRequest: controller.statusRequest.value,
+              onPress: () async => await controller.signUp(),
+              text: AppTexts.createAccount,
             ),
-            text: AppTexts.createAccount,
           ),
           const SizedBox(
             height: 25,
