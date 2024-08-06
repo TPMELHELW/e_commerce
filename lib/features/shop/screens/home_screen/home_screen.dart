@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             ),
             ProductGridWidget(
               itemCount: 10,
-              mainAxisExtent: 257,
+              mainAxisExtent: 274,
               itemBuilder: (BuildContext context, int index) {
                 return const ProductCardVerticalWidget();
               },

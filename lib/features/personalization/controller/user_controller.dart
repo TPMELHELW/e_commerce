@@ -12,6 +12,7 @@ import 'package:e_commerce/utils/function/snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find<UserController>();
@@ -93,6 +94,31 @@ class UserController extends GetxController {
     } on FirebaseAuthException catch (e) {
       final error = AuthError.from(e);
       showErrorSnackbar(error.dialogTitle, error.dialogText);
+      statusRequest.value = StatusRequest.serverFailure;
+    }
+  }
+
+  Future<void> uploadImage() async {
+    try {
+      final image = await ImagePicker()
+          .pickImage(source: ImageSource.gallery, imageQuality: 70);
+      if (image != null) {
+        if (!await checkInternet()) {
+          statusRequest.value = StatusRequest.offline;
+          return;
+        }
+        statusRequest.value = StatusRequest.loading;
+        final imageUrl =
+            await userRepo.uploadProfileImage('Users/Profile/', image);
+        Map<String, dynamic> data = {'ProfilePicture': imageUrl};
+        await userRepo.updateSingleUserInf(data);
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+        statusRequest.value = StatusRequest.success;
+        showSuccessSnackbar('Success', 'Upload Image Success');
+      }
+    } catch (e) {
+      showErrorSnackbar('Error', e.toString());
       statusRequest.value = StatusRequest.serverFailure;
     }
   }

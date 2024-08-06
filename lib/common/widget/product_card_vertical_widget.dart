@@ -9,7 +9,7 @@ class ProductCardVerticalWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
           BoxShadow(
@@ -19,43 +19,48 @@ class ProductCardVerticalWidget extends StatelessWidget {
               spreadRadius: 0.3),
         ],
       ),
-      child: Stack(
+      child: Column(
         children: [
-          ///Image
-          Container(
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.black38,
-            ),
-            child: Image.asset(
-              AppImages.productImage1,
-            ),
-          ),
+          Stack(
+            children: [
+              ///Image
+              Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black38,
+                ),
+                child: Image.asset(
+                  AppImages.productImage1,
+                ),
+              ),
 
-          ///heart Icon
-          Positioned(
-            right: 0,
-            top: 0,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Iconsax.heart),
-            ),
-          ),
+              ///heart Icon
+              Positioned(
+                right: 0,
+                top: 0,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Iconsax.heart),
+                ),
+              ),
 
-          ///persent
-          Container(
-            padding: const EdgeInsets.all(5),
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Text(
-              '25%',
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
+              ///persent
+              Container(
+                padding: const EdgeInsets.all(5),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  '25%',
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(left: 5),
@@ -98,7 +103,7 @@ class ProductCardVerticalWidget extends StatelessWidget {
                     ),
                     Container(
                       decoration: const BoxDecoration(
-                        color: Colors.black,
+                        color: Colors.white,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
                           bottomRight: Radius.circular(10),
@@ -107,6 +112,7 @@ class ProductCardVerticalWidget extends StatelessWidget {
                       child: IconButton(
                         onPressed: () {},
                         icon: const Icon(
+                          color: Colors.black,
                           Iconsax.add,
                         ),
                       ),

@@ -1,5 +1,6 @@
 void main() {
-  for (int i = 2; i > 1; i++) {
-    print('mahmoud');
-  }
+  print(24.round());
 }
+
+// String evenOrOdd(int number) {
+// }

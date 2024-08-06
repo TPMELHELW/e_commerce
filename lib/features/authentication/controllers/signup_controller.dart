@@ -51,6 +51,7 @@ class SignUpController extends GetxController {
         userName: userName.text,
         email: email.text,
         number: phone.text,
+        profilePicture: '',
       );
 
       ///Store User Data in Firestore

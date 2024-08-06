@@ -57,13 +57,13 @@ class LogInController extends GetxController {
       final credential = await AuthRepository.instance.googleSignIn();
 
       final UserModel user = UserModel(
-        id: credential.user!.uid,
-        firstName: credential.user?.displayName ?? '',
-        lastName: credential.user?.displayName ?? '',
-        userName: credential.user?.displayName ?? '',
-        email: credential.user?.email ?? '',
-        number: credential.user?.phoneNumber ?? '',
-      );
+          id: credential.user!.uid,
+          firstName: credential.user?.displayName ?? '',
+          lastName: credential.user?.displayName ?? '',
+          userName: credential.user?.displayName ?? '',
+          email: credential.user?.email ?? '',
+          number: credential.user?.phoneNumber ?? '',
+          profilePicture: credential.user?.photoURL ?? '');
 
       UserRepository().saveUserInf(user);
 

@@ -16,7 +16,7 @@ class FavouriteScreen extends StatelessWidget {
           itemBuilder: (_, index) {
             return const ProductCardVerticalWidget();
           },
-          mainAxisExtent: 255,
+          mainAxisExtent: 274,
           itemCount: 6,
         ),
       ),

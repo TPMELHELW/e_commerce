@@ -7,15 +7,16 @@ class UserModel {
   String userName;
   String email;
   String number;
+  String profilePicture;
 
-  UserModel({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.userName,
-    required this.email,
-    required this.number,
-  });
+  UserModel(
+      {required this.id,
+      required this.firstName,
+      required this.lastName,
+      required this.userName,
+      required this.email,
+      required this.number,
+      required this.profilePicture});
 
   Map<String, dynamic> toJson() {
     return {
@@ -24,6 +25,7 @@ class UserModel {
       'UserName': userName,
       'Email': email,
       'PhoneNumber': number,
+      'ProfilePicture': profilePicture
     };
   }
 
@@ -34,6 +36,7 @@ class UserModel {
         userName: '',
         email: '',
         number: '',
+        profilePicture: '',
       );
 
   factory UserModel.fromSnapshot(
@@ -46,6 +49,7 @@ class UserModel {
       userName: data['UserName'] ?? '',
       email: data['Email'] ?? '',
       number: data['PhoneNumber'] ?? '',
+      profilePicture: data['ProfilePicture'] ?? '',
     );
   }
 }
